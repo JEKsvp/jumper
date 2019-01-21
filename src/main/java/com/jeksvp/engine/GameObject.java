@@ -3,6 +3,7 @@ package com.jeksvp.engine;
 import javafx.scene.input.KeyEvent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Data
 @EqualsAndHashCode(exclude = "intersections")
+@ToString(exclude = "intersections")
 public abstract class GameObject {
     private int width;
     private int height;
@@ -45,4 +47,8 @@ public abstract class GameObject {
     public abstract void onUpdate();
 
     public abstract void onKeyPressed(KeyEvent event);
+
+    public void setClearIntersections(){
+        this.intersections.clear();
+    }
 }

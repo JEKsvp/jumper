@@ -20,7 +20,7 @@ public class Canvas {
     }
 
     public void clean() {
-        this.intersectionObjects = new HashMap<>();
+        this.intersectionObjects.clear();
         fillBackground();
     }
 
@@ -33,6 +33,7 @@ public class Canvas {
     }
 
     public void addGameObject(GameObject gameObject) {
+        gameObject.setClearIntersections();
         Map<Integer, List<Integer>> coordinates = getCoordinates(gameObject);
         for (int i = 0; i < this.coordinates.length; i++) {
             for (int j = 0; j < this.coordinates[i].length; j++) {

@@ -4,6 +4,8 @@ import com.jeksvp.engine.GameObject;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Arrays;
+
 
 public class Player extends GameObject {
 
@@ -26,6 +28,9 @@ public class Player extends GameObject {
 
     @Override
     public void onUpdate() {
+        if (!getIntersections().isEmpty()) {
+            System.exit(0);
+        }
         if (isJumping) {
             if (direction == Direction.UP) {
                 setY(getY() - 1);
