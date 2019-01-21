@@ -1,5 +1,7 @@
 package com.jeksvp.engine;
 
+import javafx.scene.input.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +35,11 @@ public class GameWorld {
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public void keyPressed(KeyEvent event) {
+        for (GameObject gameObject : gameObjects) {
+            gameObject.onKeyPressed(event);
+        }
     }
 }

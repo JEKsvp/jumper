@@ -1,7 +1,9 @@
 package com.jeksvp;
 
+import com.jeksvp.engine.GameWorld;
 import javafx.application.Application;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -12,7 +14,9 @@ public class Main extends Application {
         VBox root = new GameSceneBuilder().build(primaryStage);
         primaryStage.show();
         TextArea textArea = (TextArea) root.getChildren().get(0);
-        ScenePainter scenePainter = new ScenePainter();
+        GameWorld gameWorld = new GameWorldConstructor().buildJumperGameWorld();
+        textArea.setOnKeyPressed(e -> gameWorld.keyPressed(e));
+        ScenePainter scenePainter = new ScenePainter(gameWorld);
         new Thread(() -> {
             while (true) {
                 textArea.setText(scenePainter.draw());

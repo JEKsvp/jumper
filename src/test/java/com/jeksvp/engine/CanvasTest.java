@@ -1,6 +1,7 @@
 package com.jeksvp.engine;
 
 
+import javafx.scene.input.KeyEvent;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +21,11 @@ public class CanvasTest {
         GameObject gameObject = new GameObject(2, 5, 3, 3) {
             @Override
             public void onUpdate() {
+            }
+
+            @Override
+            public void onKeyPressed(KeyEvent event) {
+
             }
         };
         canvas.addGameObject(gameObject);
@@ -43,15 +49,30 @@ public class CanvasTest {
             @Override
             public void onUpdate() {
             }
+
+            @Override
+            public void onKeyPressed(KeyEvent event) {
+
+            }
         };
         GameObject gameObject2 = new GameObject(2, 4, 2, 2) {
             @Override
             public void onUpdate() {
             }
+
+            @Override
+            public void onKeyPressed(KeyEvent event) {
+
+            }
         };
         GameObject gameObject3 = new GameObject(6, 8, 2, 2) {
             @Override
             public void onUpdate() {
+            }
+
+            @Override
+            public void onKeyPressed(KeyEvent event) {
+
             }
         };
         canvas.addGameObject(gameObject);

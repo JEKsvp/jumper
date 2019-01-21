@@ -9,23 +9,25 @@ import java.util.*;
 @Getter
 public class Canvas {
 
-    private int[][] coordinates;
+    private Character[][] coordinates;
+    private Character backgroundChar = '0';
+    private Character objectChar = '1';
 
-    private Map<Pair<Integer, Integer>, List<GameObject>> gameObjectMap = new HashMap<>();
+    private Map<Pair<Integer, Integer>, List<GameObject>> intersectionObjects = new HashMap<>();
 
     public Canvas(int width, int height) {
-        this.coordinates = new int[height][width];
+        this.coordinates = new Character[height][width];
     }
 
     public void clean() {
-        this.gameObjectMap = new HashMap<>();
-        fillZeros();
+        this.intersectionObjects = new HashMap<>();
+        fillBackground();
     }
 
-    private void fillZeros() {
+    private void fillBackground() {
         for (int i = 0; i < this.coordinates.length; i++) {
             for (int j = 0; j < this.coordinates[i].length; j++) {
-                this.coordinates[i][j] = 0;
+                this.coordinates[i][j] = backgroundChar;
             }
         }
     }
@@ -34,39 +36,39 @@ public class Canvas {
         Map<Integer, List<Integer>> coordinates = getCoordinates(gameObject);
         for (int i = 0; i < this.coordinates.length; i++) {
             for (int j = 0; j < this.coordinates[i].length; j++) {
-                if (j < this.coordinates.length && i < this.coordinates[j].length) {
-                    if (coordinates.containsKey(i) && coordinates.get(i).contains(j)) {
-                        this.coordinates[j][i] = 1;
-                        if (hasIntersections(i, j, gameObjectMap, gameObject)) {
-                            addIntersections(i, j, gameObjectMap, gameObject);
+                if (coordinates.containsKey(j) && coordinates.get(j).contains(i)) {
+                    if (i < this.coordinates.length && j < this.coordinates[i].length) {
+                        this.coordinates[i][j] = objectChar;
+                        if (hasIntersections(i, j, intersectionObjects)) {
+                            addIntersections(i, j, intersectionObjects, gameObject);
                         }
-                        addToMap(i, j, gameObjectMap, gameObject);
+                        addToMap(i, j, intersectionObjects, gameObject);
                     }
                 }
             }
         }
     }
 
-    private void addIntersections(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> gameObjectMap, GameObject gameObject) {
+    private void addIntersections(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> intersectionObjects, GameObject gameObject) {
         Pair<Integer, Integer> coordinates = new Pair<>(i, j);
-        List<GameObject> gameObjects = gameObjectMap.get(coordinates);
-        for (GameObject go : gameObjectMap.get(coordinates)) {
+        List<GameObject> gameObjects = intersectionObjects.get(coordinates);
+        for (GameObject go : intersectionObjects.get(coordinates)) {
             go.addIntersection(gameObject);
         }
         gameObject.addIntersections(gameObjects);
     }
 
-    private boolean hasIntersections(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> gameObjectMap, GameObject gameObject) {
-        List<GameObject> gameObjects = gameObjectMap.get(new Pair<>(i, j));
+    private boolean hasIntersections(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> intersectionObjects) {
+        List<GameObject> gameObjects = intersectionObjects.get(new Pair<>(i, j));
         return gameObjects != null;
     }
 
-    private void addToMap(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> gameObjectMap, GameObject gameObject) {
+    private void addToMap(int i, int j, Map<Pair<Integer, Integer>, List<GameObject>> intersectionObjects, GameObject gameObject) {
         Pair<Integer, Integer> coordinates = new Pair<>(i, j);
-        if (gameObjectMap.containsKey(coordinates)) {
-            gameObjectMap.get(coordinates).add(gameObject);
+        if (intersectionObjects.containsKey(coordinates)) {
+            intersectionObjects.get(coordinates).add(gameObject);
         } else {
-            gameObjectMap.put(coordinates, new ArrayList<>(Collections.singletonList(gameObject)));
+            intersectionObjects.put(coordinates, new ArrayList<>(Collections.singletonList(gameObject)));
         }
     }
 
@@ -89,4 +91,13 @@ public class Canvas {
         return coordinates;
     }
 
+
+    public void setBackgroundNumber(Character backgroundChar) {
+        this.backgroundChar = backgroundChar;
+    }
+
+    public void setObjectChar(Character objectChar) {
+        this.objectChar = objectChar;
+    }
 }
+

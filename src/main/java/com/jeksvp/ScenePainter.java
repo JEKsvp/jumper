@@ -6,13 +6,10 @@ import com.jeksvp.objects.Player;
 
 public class ScenePainter {
 
-    private static int WIDTH = 71;
-    private static int HEIGHT = 25;
+    private GameWorld gameWorld;
 
-    private GameWorld gameWorld = new GameWorld(new Canvas(WIDTH, HEIGHT));
-
-    public ScenePainter() {
-        gameWorld.addGameObject(new Player(0,0, 5, 2));
+    public ScenePainter(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
     }
 
     public String draw() {
@@ -21,7 +18,7 @@ public class ScenePainter {
     }
 
     private String buildString(Canvas canvas) {
-        int[][] coordinates = canvas.getCoordinates();
+        Character[][] coordinates = canvas.getCoordinates();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < coordinates.length; i++) {
             for (int j = 0; j < coordinates[i].length; j++) {
