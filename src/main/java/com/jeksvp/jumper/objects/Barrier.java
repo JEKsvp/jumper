@@ -1,7 +1,7 @@
-package com.jeksvp.objects;
+package com.jeksvp.jumper.objects;
 
-import com.jeksvp.engine.GameObject;
-import com.jeksvp.engine.GameWorld;
+import com.jeksvp.jumper.engine.GameObject;
+import com.jeksvp.jumper.engine.GameWorld;
 import javafx.scene.input.KeyEvent;
 
 public class Barrier extends GameObject {

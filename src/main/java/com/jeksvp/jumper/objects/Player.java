@@ -1,24 +1,18 @@
-package com.jeksvp.objects;
+package com.jeksvp.jumper.objects;
 
-import com.jeksvp.engine.GameObject;
+import com.jeksvp.jumper.engine.GameObject;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-import java.util.Arrays;
 
 
 public class Player extends GameObject {
 
+    private static final int JUMP_HEIGHT = 10;
+
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.startY = y;
-        this.min = startY + 10;
-    }
-
-    public Player(int x, int y, int width, int height, boolean isPhysical) {
-        super(x, y, width, height, isPhysical);
-        this.startY = y;
-        this.min = startY - 10;
+        this.min = startY - JUMP_HEIGHT;
     }
 
     private boolean isJumping = false;

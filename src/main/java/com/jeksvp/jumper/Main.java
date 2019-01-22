@@ -1,21 +1,23 @@
-package com.jeksvp;
+package com.jeksvp.jumper;
 
-import com.jeksvp.engine.GameWorld;
+import com.jeksvp.jumper.engine.GameWorld;
 import javafx.application.Application;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        VBox root = new GameSceneBuilder().build(primaryStage);
+    public void start(Stage primaryStage) {
+        JumperGameScene gameScene = new JumperGameScene(primaryStage);
+        VBox root = gameScene.getRoot();
         primaryStage.show();
-        TextArea textArea = (TextArea) root.getChildren().get(0);
+
+        TextArea textArea = gameScene.getTextArea();
         GameWorld gameWorld = new GameWorldConstructor().buildJumperGameWorld();
-        textArea.setOnKeyPressed(e -> gameWorld.keyPressed(e));
+        textArea.setOnKeyPressed(gameWorld::keyPressed);
+
         ScenePainter scenePainter = new ScenePainter(gameWorld);
         new Thread(() -> {
             while (true) {

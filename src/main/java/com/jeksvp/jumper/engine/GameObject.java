@@ -1,11 +1,10 @@
-package com.jeksvp.engine;
+package com.jeksvp.jumper.engine;
 
 import javafx.scene.input.KeyEvent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,12 +13,12 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "intersections")
 @ToString(exclude = "intersections")
 public abstract class GameObject {
+
     private int width;
     private int height;
     private int x;
     private int y;
     private Set<GameObject> intersections = new HashSet<>();
-    private boolean isPhysical;
 
     public GameObject(int x, int y, int width, int height) {
         this.width = width;
@@ -28,13 +27,6 @@ public abstract class GameObject {
         this.y = y;
     }
 
-    public GameObject(int x, int y, int width, int height, boolean isPhysical) {
-        this.width = width;
-        this.height = height;
-        this.x = x;
-        this.y = y;
-        this.isPhysical = isPhysical;
-    }
 
     public void addIntersection(GameObject gameObject) {
         this.intersections.add(gameObject);
@@ -48,7 +40,7 @@ public abstract class GameObject {
 
     public abstract void onKeyPressed(KeyEvent event);
 
-    public void setClearIntersections(){
+    public void clearIntersections(){
         this.intersections.clear();
     }
 }

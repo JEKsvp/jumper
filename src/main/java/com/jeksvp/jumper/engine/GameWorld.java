@@ -1,4 +1,4 @@
-package com.jeksvp.engine;
+package com.jeksvp.jumper.engine;
 
 import javafx.scene.input.KeyEvent;
 

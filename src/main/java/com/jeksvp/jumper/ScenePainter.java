@@ -1,8 +1,7 @@
-package com.jeksvp;
+package com.jeksvp.jumper;
 
-import com.jeksvp.engine.Canvas;
-import com.jeksvp.engine.GameWorld;
-import com.jeksvp.objects.Player;
+import com.jeksvp.jumper.engine.Canvas;
+import com.jeksvp.jumper.engine.GameWorld;
 
 public class ScenePainter {
 
